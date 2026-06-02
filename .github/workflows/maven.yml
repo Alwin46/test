@@ -29,5 +29,5 @@ jobs:
       with:
         name: test-reports
         path: |
-          test.log
+          logs/**
           TestReport.html
