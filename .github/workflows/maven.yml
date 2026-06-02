@@ -22,3 +22,12 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn clean test
+
+    - name: Upload Test Reports
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-reports
+        path: |
+          test.log
+          TestReport.html
