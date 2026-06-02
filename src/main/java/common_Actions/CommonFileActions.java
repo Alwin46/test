@@ -2,11 +2,11 @@ package common_Actions;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.slf4j.Logger;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
@@ -38,10 +38,15 @@ public class CommonFileActions {
         String url=properties.getProperty("url");
 
         if (browser.equals("chrome")){
-            driver=new ChromeDriver();
+            ChromeOptions options=new ChromeOptions();
+            options.addArguments("--headless=new");
+            driver=new ChromeDriver(options);
         }else if(browser.equals("firefox")){
-            driver=new FirefoxDriver();
+            FirefoxOptions options=new FirefoxOptions();
+            options.addArguments("-headless");
+            driver=new FirefoxDriver(options);
         }
+
 
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
